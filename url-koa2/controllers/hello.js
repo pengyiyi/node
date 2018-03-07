@@ -1,8 +1,9 @@
-//处理hello页面的逻辑
-var fn_hello = async(ctx,next)=>{
+//处理 hello
+var fn_hello = async (ctx, next) => {
     var name = ctx.params.name;
-    ctx.response.body=`<h1>Hello ,${name}!`);
+    ctx.response.body = `<h1>Hello, ${name}!</h1>`;
 };
-module.exports ={
-    'GET /hello/:name':fn_hello;
-}
+
+module.exports = {
+    'GET /hello/:name': fn_hello
+};
