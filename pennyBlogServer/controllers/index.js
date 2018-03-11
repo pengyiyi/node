@@ -1,14 +1,17 @@
-var test = require('../sequelize/sequelize');
-
+var Container = require('../sequelize/sequelize');
 
 //处理主页的逻辑的函数放在这里
 var fn_index = async(ctx,next) =>{
-    ctx.response.body =`<h1>Index</h1>
+   /*ctx.response.body =`<h1>Index</h1>
     <form action="/signin" method="post">
     <p>Name: <input name="name" value="koa"></p>
     <p>Password: <input name="password" type="password"></p>
     <p><input type="submit" value="Submit"></p>
-  </form>`;  
+  </form>`; */
+  ctx.response.body ={
+    "data":"hi"
+  }
+
 };
 
 var fn_signin = async(ctx,next)=>{
@@ -23,20 +26,20 @@ var fn_signin = async(ctx,next)=>{
     } 
 };
 
-var fn_editor = async(ctx,next)=>{
-    var content= ctx.request.body.data ||'error';
-   // console.log(`edit with: ${content}`);
-   //返回给前端内容
-    ctx.response.body ={"state":"success"}; 
-   //调用数据库处理函数进行数据的更新操作
-   (async ()=>{
-    var pets = await test({name:"pengyi","desc":"是描述","content":content});
-    })();
+//获取所有列表
+var fn_AllUrls =  async(ctx,next) =>{
+        var result = await Container.getAllUrls();
+        console.log(result);
+        //var temp =[];
+       // for (let p of result) {
+       //    temp.push(JSON.stringify(p));
+       // }
+        ctx.response.body ={"data":result}; 
 };
 
 
 module.exports ={
     'GET /':fn_index,
     'POST /Signin':fn_signin,
-    'POST /editor':fn_editor,
+    'GET /getAllUrls':fn_AllUrls
 }

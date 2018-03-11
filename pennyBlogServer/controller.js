@@ -1,5 +1,5 @@
 const fs = require('fs');
-
+const upload = require('./koa-multer');
 // add url-route in /controllers:
 function addMapping(router, mapping) {
     for (var url in mapping) {
@@ -37,10 +37,18 @@ function addControllers(router, dir) {
     });
 }
 
+
 module.exports = function (dir){
     let
         controllers_dir = dir || 'controllers',
         router = require('koa-router')();
+    router.post('/upload', upload.single('myImg'), async (ctx, next) => {  
+        console.log('register URL mapping: POST /upload')
+        const filename = `http://localhost:3000/imgs/${ctx.req.file.filename}`;
+        ctx.body ={
+            newPath:filename
+        }
+      });
     addControllers(router, controllers_dir);
     return router.routes();  //注册路由
 };
