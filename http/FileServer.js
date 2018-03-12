@@ -17,6 +17,7 @@ var server = http.createServer(function (request, response) {
     var pathname = url.parse(request.url).pathname;
     // 获得对应的本地文件路径，类似 '/srv/www/css/bootstrap.css':
     var filepath = path.join(root, pathname);
+    console.log(filepath);
     // 获取文件状态:
     fs.stat(filepath, function (err, stats) {
         if (!err && stats.isFile()) {

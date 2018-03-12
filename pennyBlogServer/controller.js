@@ -49,6 +49,7 @@ module.exports = function (dir){
             newPath:filename
         }
       });
+    router.redirect('/','/index.html');
     addControllers(router, controllers_dir);
     return router.routes();  //注册路由
 };

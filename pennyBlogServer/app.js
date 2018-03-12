@@ -19,6 +19,7 @@ app.use(bodyParser());
 app.use(controller());
 //注册koa-static配置静态文件夹地址使得上传的图片进行回显
 app.use(require('koa-static')(__dirname + '/public'));
+app.use(require('koa-static')(__dirname+'/vue/dist'));
 
 app.listen(3000);
 console.log('app started at port 3000...');
